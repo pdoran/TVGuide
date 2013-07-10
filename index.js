@@ -1,7 +1,7 @@
 /*global module:false,require:false,console:false */
 var webroot = "./server";
 var port = 8000;
-var assetTypes = [".js", ".css", ".txt", ".ico", ".html", ".png",".jpg"];
+var assetTypes = [".js", ".css", ".txt", ".ico", ".html", ".png",".jpg",".json"];
 
 var nodeStatic = require("node-static");
 var http = require("http");
