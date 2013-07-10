@@ -20,3 +20,18 @@ body { padding-top: 100px; }
 .nav-list li {
 	fot-size: 24px;
 }
+
+img.season-poster {
+	width:138px;
+	height: 207px;
+}
+
+span.love-icon {
+	padding-top: 7px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	height: 36px;
+	width: 39px;
+	background: url(/img/icon-love-large.png) no-repeat;
+}

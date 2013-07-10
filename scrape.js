@@ -1,5 +1,6 @@
 var request = require('request');
 var fs = require('fs');
+var nfs = require('node-fs');
 
 var apiKey = "ec989300f0953fd4abcf015b6c318627";
 
@@ -7,7 +8,7 @@ var getShowSummary = function(showName) {
 	request("http://api.trakt.tv/show/summary.json/"+apiKey+"/"+showName).pipe(fs.createWriteStream("./server/json/"+showName+".json"));	
 }
 var getSeason = function(showName, season) {
-  fs.mkdir("./server/json/"+showName+"/seasons/", function(err){
+  nfs.mkdir("./server/json/"+showName+"/seasons/", 0777, true, function(err){
     if(err) console.log(err);
     request("http://api.trakt.tv/show/season.json/"+apiKey+"/"+showName+"/"+season).pipe(fs.createWriteStream("./server/json/"+showName+"/seasons/"+season+".json"));  
   });
