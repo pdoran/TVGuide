@@ -16,6 +16,7 @@
     "url": "https://github.com/pdoran/TVGuide/issues"
   },
   "dependencies": {
-    "request": "~2.22.0"
+    "request": "~2.22.0",
+    "node-static": "~0.7.0"
   }
 }
