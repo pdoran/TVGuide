@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "request": "~2.22.0",
-    "node-static": "~0.7.0"
+    "node-static": "~0.7.0",
+    "node-fs": "~0.1.6"
   }
 }

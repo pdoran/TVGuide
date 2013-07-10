@@ -1,0 +1,22 @@
+body { padding-top: 100px; }
+.container {
+	width: 1170px;
+}
+.nav-bar {
+	width: 1170px;
+}
+
+.navbar-fixed-top .container {
+	width: 1170px;	
+}
+
+.well h3 {
+	padding:5px;
+}
+.well h3.active {
+	background-color: #18bc9c;
+	border-radius: 10px;
+}
+.nav-list li {
+	fot-size: 24px;
+}

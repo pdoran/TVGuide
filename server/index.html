@@ -11,11 +11,9 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
-
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
   </head>
 
   <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -34,36 +32,17 @@
        <a class="brand" href="../">TV Guide</a>
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
-          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">News</a></li>
-          <li><a id="swatch-link" href="../#gallery">Gallery</a></li>
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Preview <b class="caret"></b></a>
-            <ul class="dropdown-menu" id="swatch-menu">
-              <li><a href="../default/">Default</a></li>
-              <li class="divider"></li>
-              <li><a href="../amelia/">Amelia</a></li>
-              <li><a href="../cerulean/">Cerulean</a></li>
-              <li><a href="../cosmo/">Cosmo</a></li>
-              <li><a href="../cyborg/">Cyborg</a></li>
-              <li><a href="../flatly/">Flatly</a></li>
-              <li><a href="../journal/">Journal</a></li>
-              <li><a href="../readable/">Readable</a></li>
-              <li><a href="../simplex/">Simplex</a></li>
-              <li><a href="../slate/">Slate</a></li>
-              <li><a href="../spacelab/">Spacelab</a></li>
-              <li><a href="../spruce/">Spruce</a></li>
-              <li><a href="../superhero/">Superhero</a></li>
-              <li><a href="../united/">United</a></li>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Shows <b class="caret"></b></a>
+            <ul class="dropdown-menu" id="show-menu">
+              <li><a href="../amelia/">Shows Here</a></li>
             </ul>
           </li>
+          
           <li class="dropdown" id="preview-menu">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Download <b class="caret"></b></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Genres <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a target="_blank" href="bootstrap.min.css">bootstrap.min.css</a></li>
-              <li><a target="_blank" href="bootstrap.css">bootstrap.css</a></li>
-              <li class="divider"></li>
-              <li><a target="_blank" href="variables.less">variables.less</a></li>
-              <li><a target="_blank" href="bootswatch.less">bootswatch.less</a></li>
+              <li><a target="_blank" href="bootstrap.min.css">Genres will go here</a></li>
             </ul>
           </li>
         </ul>
@@ -80,24 +59,18 @@
 <header class="jumbotron subhead" id="overview">
   <div class="row">
     <div class="span6">
-      <h1>Flatly</h1>
-      <p class="lead">Flat and clean.</p>
-      <p>By <a href="http://www.jgog.in">Jenil Gogari</a></p>
+      <h1>Show Title</h1>
+      <p class="lead">Description</p>
     </div>
     <div class="span4 offset2">
-      <div class="bsa well">
-          <div id="bsap_1277971" class="bsarocks bsap_c466df00a3cd5ee8568b5c4983b6bb19"></div>
-      </div>
+      <img src="/img/posters/21.3.jpg" class="img-polaroid">
     </div>
   </div>
   <div class="subnav">
     <ul class="nav nav-pills">
-      <li><a href="#typography">Typography</a></li>
-      <li><a href="#navbar">Navbar</a></li>
-      <li><a href="#buttons">Buttons</a></li>
-      <li><a href="#forms">Forms</a></li>
-      <li><a href="#tables">Tables</a></li>
-      <li><a href="#miscellaneous">Miscellaneous</a></li>
+      <li><a href="#Seasons">Seasons</a></li>
+      <li><a href="#Episodes">Episodes</a></li>
+      <li><a href="#Actors">Actors</a></li>
     </ul>
   </div>
 </header>
@@ -105,30 +78,29 @@
 
 
 
-<!-- Typography
+<!-- Seasons
 ================================================== -->
 <section id="typography">
   <div class="page-header">
-    <h1>Typography</h1>
+    <h1>Seasons</h1>
   </div>
 
   <!-- Headings & Paragraph Copy -->
   <div class="row">
 
     <div class="span4">
-      <div class="well">
-        <h1>h1. Heading 1</h1>
-        <h2>h2. Heading 2</h2>
-        <h3>h3. Heading 3</h3>
-        <h4>h4. Heading 4</h4>
-        <h5>h5. Heading 5</h5>
-        <h6>h6. Heading 6</h6>
+      <div class="well" style="padding: 8px 0;">
+        <ul class="nav nav-list">
+          <li class="active"><a href="#">Season 1</a></li>
+          <li><a href="#">Season 2</a></li>
+          <li><a href="#">Season 3</a></li>
+        </ul>
       </div>
     </div>
 
-    <div class="span4">
-      <h3>Example body text</h3>
-      <p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+    <div class="span8">
+      <h3>Season 1</h3>
+      <p>Season 1 get's it all started. We are introduced to such and such and such and such. Awesome things happen!</p>
       <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
     </div>
 
