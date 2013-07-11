@@ -133,55 +133,67 @@
 <!-- Episodes
 ================================================== -->
 <section id="navbar" data-bind="if: selectedView() && selectedView().navLabel==='Episodes'">
-  <div class="page-header">
-    <h1>Episodes</h1>
-  </div>
-  <div class="row">
-    <div class="span4">
-      <div class="well" style="padding: 8px 0;">
-        <ul class="nav nav-list">
-          <li class="nav-header">Season 1</li>
-          <li class="active"><a href="#">Episode 1</a></li>
-          <li><a href="#">Episode 2</a></li>
-          <li><a href="#">Episode 3</a></li>
-        </ul>
-      </div>
+  <div data-bind="with: selectedView">
+    <div class="page-header">
+      <h1>Episodes</h1>
     </div>
-    <div class="span8">
-      <div class="row">
-        <span class="span6">
-          <h3>Unaired Pilot</h3>
-          <h4>Aired: 2008-06-16</h4>
-        </span>
-        <span class="span2" style="padding-top: 30px">
-          <span class="love-icon pull-right" style="padding-top: 8px; padding-left: 14px;"><i class="icon-plus"></i></span>
-        </span>
+    <div class="row">
+      <div class="span4">
+        <div class="well" style="padding: 8px 0;">
+          <select style="width: 100%" data-bind="value: selectedSeason, options: seasons, optionsText: 'seasonName', optionsCaption: 'Select a Season..' ">
+          </select>
+          <ul class="nav nav-list" data-bind="foreach: episodes">
+              <li data-bind="css: { active: $parent.selectedEpisode()===$data}, click: $parent.selectEpisode">
+                <a href="#">Episode <span data-bind="text: $data.data.episode"></span></a>
+              </li>
+          </ul>
+        </div>
       </div>
-      <p>Very similar to the aired pilot called Strange Love, except the actor who plays Tara Thornton in this version is Brook Kerr instead of Rutina Wesley.
-      This version was released online around the middle of June 2008.</p>
-    </div>
-  </div>
+      <div class="span8" data-bind="with: selectedEpisode">
+        <div class="row">
+          <span class="span6">
+            <h3>
+              <span data-bind="text: 'S'+data.season+'E'+data.episode"></span>
 
+              <span data-bind="text: data.title"></span></h3>
+            <h4>Aired: <span data-bind="text: new Date(data.first_aired_iso).toDateString()"></span></h4>
+          </span>
+          <span class="span2" style="padding-top: 30px">
+            <span class="love-icon pull-right" style="padding-top: 8px; padding-left: 14px;">
+                <i class="icon-plus"></i>
+            </span>
+          </span>
+        </div>
+        <p data-bind="text:data.overview">Very similar to the aired pilot called Strange Love, except the actor who plays Tara Thornton in this version is Brook Kerr instead of Rutina Wesley.
+        This version was released online around the middle of June 2008.</p>
+      </div>
+    </div>
+  </div>
+  
 </section>
 
 <!-- Actors
 ================================================== -->
-<section id="buttons" data-bind="if: selectedView() && selectedView().navLabel==='Actors'">
-  <div class="page-header">
-    <h1>Actors</h1>
-  </div>
- <div class="row">
-    <div class="span4">
-      <div class="well" style="padding: 8px 0;">
-        <ul class="nav nav-list">
-          <li class="active"><a href="#">Anna Paquin</a></li>
-        </ul>
-      </div>
+<section id="buttons" data-bind="if: selectedView() && selectedView().navLabel==='Characters'">
+  <div data-bind="with: selectedView">
+    <div class="page-header">
+      <h1>Characters</h1>
     </div>
-    <div class="span8">
-        <h3>Anna Paquin</h3>
-        <h4>Sookie Stackhouse</h4>
-        <p>Anna Paquin is in TV shows and movies!</p>
+   <div class="row">
+      <div class="span4">
+        <div class="well" style="padding: 8px 0;">
+          <ul class="nav nav-list" data-bind="foreach: actors">
+            <li data-bind="click: $parent.selectActor, css: { active: $parent.selectedActor()===$data}">
+              <a href="#" data-bind="text: $data.data.character"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="span8" data-bind="with: selectedActor">
+          <h3 data-bind="text: data.character">Anna Paquin</h3>
+          <h4 data-bind="text: data.name">Sookie Stackhouse</h4>
+          <p>We really don't have any character information.</p>
+      </div>
     </div>
   </div>
 </section>

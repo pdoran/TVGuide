@@ -45,6 +45,7 @@ var Season = function(showUrlName,seasonNum, cb) {
 	var self = this;
 	self.episodes = new Array();
 	self.data = null;
+	self.seasonName = "Season " + seasonNum;
 	fetchJson(url, function(season) {
 		self.data = season;
 		self.posterUrl = "/img/posters/"+showUrlName+"-"+seasonNum+".jpg";
