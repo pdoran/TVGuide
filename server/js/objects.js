@@ -1,6 +1,3 @@
-var User = function() {
-	this.favoriteCount = 0;
-};
 
 var Show = function(name, cb) {
 
@@ -27,20 +24,27 @@ var Show = function(name, cb) {
 			}
 		}
 		for(var i=1;i<=show.seasons;i++) {
-			self.seasons.push(new Season(self.nameURLNormalized,i, dataCB));
+			self.seasons.push(new Season(self.name,i, dataCB));
 		}
 		show.people.actors.forEach(function(actor){
 			self.actors.push(new Actor(actor));
 		})
 	});
+	self.toString = function() {
+		return self.name;
+	}
 };
 
 var Actor = function(obj) {
 	var self = this;
 	self.data = obj;
+	self.toString = function() {
+		return self.data.character + " (" + self.data.name + ")";
+	}
 }
 
-var Season = function(showUrlName,seasonNum, cb) {
+var Season = function(show,seasonNum, cb) {
+	var showUrlName = show.toLowerCase().replace(/ /g,"-");
 	var url = "/json/"+showUrlName+"/seasons/"+seasonNum+".json";
 	var self = this;
 	self.episodes = new Array();
@@ -50,15 +54,19 @@ var Season = function(showUrlName,seasonNum, cb) {
 		self.data = season;
 		self.posterUrl = "/img/posters/"+showUrlName+"-"+seasonNum+".jpg";
 		season.forEach(function(episode) {
-			self.episodes.push(new Episode(episode));
+			self.episodes.push(new Episode(episode, show));
 		});
 		cb();
 	});
 }
 
-var Episode = function(obj) {
+var Episode = function(obj, show) {
 	var self = this;
 	self.data = obj;
+	self.show = show;
+	self.toString = function() {
+		return self.show + " S"+self.data.season+"E"+self.data.episode+": "+self.data.title;
+	}
 }
 
 var fetchJson = function(url, cb) {

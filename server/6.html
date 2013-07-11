@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Patrick's TV Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flat and Clean.">
+    <meta name="author" content="Jenil Gogari">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+  </head>
+
+  <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
+
+
+  <!-- Navbar
+    ================================================== -->
+ <div class="navbar navbar-fixed-top">
+   <div class="navbar-inner">
+     <div class="container">
+       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </a>
+       <a class="brand" href="../">TV Guide</a>
+       <div class="nav-collapse collapse" id="main-menu">
+        <p class="navbar-text pull-right">
+          <span id="userFavorites" class="love-icon" data-bind="text: userLikeCount, click: showUserFavorites">0</span></p>
+        <ul class="nav" id="main-menu-left">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Shows <b class="caret"></b></a>
+            <ul class="dropdown-menu" id="show-menu" data-bind="foreach: shows">
+              <!--<li data-bind="css: {active: $parent.selectedShow()===$data }">-->
+              <li data-bind="activeMenu: $parent.selectedShow"><a href="#" data-bind="text: title, click: $parent.selectShow">Shows Here</a></li>
+            </ul>
+          </li>
+          
+          <li class="dropdown" id="preview-menu">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Genres <b class="caret"></b></a>
+            <ul class="dropdown-menu" data-bind="foreach: genres">
+              <li><a href="#" data-bind="text: $data"></a></li>
+            </ul>
+          </li>
+        </ul>
+       </div>
+     </div>
+   </div>
+ </div>
+
+<div class="container">
+
+<!-- Show Info
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="row" data-bind="with: selectedShow">
+    <div class="span6">
+      <h1 data-bind="text: title"></h1>
+      <h2 data-bind="text: network"></h2>
+      <h3 data-bind="text: rating"></h3>
+      <button class="btn" data-bind="click: $parent.removeShow">Remove</button>
+      <p class="lead" data-bind="text: description"></p>
+      <p>Genres: <span data-bind="text: data.genres.join(', ')"></span></p>
+    </div>
+    <div class="span4 offset2">
+      <img src="" class="img-polaroid" data-bind="attr: { src: posterUrl}">
+    </div>
+  </div>
+  <div class="subnav">
+    <ul class="nav nav-pills" data-bind="foreach: views">
+      <li data-bind="click: $parent.selectView, activeMenu: $parent.selectedView ">
+        <a href="#" data-bind="text: navLabel"></a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<!-- Seasons
+================================================== -->
+<section id="seasons" data-bind="if: selectedView() && selectedView().navLabel==='Seasons'">
+  <div data-bind="with: selectedView">
+    <div class="page-header">
+      <h1>Seasons</h1>
+    </div>
+
+    <div class="row">
+
+      <div class="span4">
+        <div class="well" style="padding: 8px 0;">
+          <ul class="nav nav-list" data-bind="foreach: seasons">
+            <li data-bind="click: $parent.selectSeason, activeMenu: $parent.selectedSeason "><a href="#" >Season <span data-bind="text: $index()+1"></span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="span4" data-bind="with: selectedSeason">
+        <h3 data-bind="text: 'Season ' + $data.data[0].season">Season 1</h3>
+        <p>We don't really have real season description information, so we have to make due with fake stuff.</p>
+        <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+      </div>
+      <div class="span4" data-bind="with: selectedSeason">
+        <img class="season-poster" data-bind="attr: { src: posterUrl }">
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="span12" data-bind="if: selectedSeason">
+        <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Episode #</th>
+          <th>Title</th>
+          <th>First Aired</th>
+        </tr>
+      </thead>
+      <tbody data-bind="foreach: episodes">
+        <tr>
+          <td data-bind="text: episode"></td>
+          <td data-bind="text: title"></td>
+          <td data-bind="text: new Date(first_aired_iso).toDateString()"></td>
+        </tr>
+      </tbody>
+    </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Episodes
+================================================== -->
+<section id="navbar" data-bind="if: selectedView() && selectedView().navLabel==='Episodes'">
+  <div data-bind="with: selectedView">
+    <div class="page-header">
+      <h1>Episodes</h1>
+    </div>
+    <div class="row">
+      <div class="span4">
+        <div class="well" style="padding: 8px 0;">
+          <select style="width: 100%" data-bind="value: selectedSeason, options: seasons, optionsText: 'seasonName', optionsCaption: 'Select a Season..' ">
+          </select>
+          <ul class="nav nav-list" data-bind="foreach: episodes">
+              <li data-bind="activeMenu: $parent.selectedEpisode, click: $parent.selectEpisode">
+                <a href="#">Episode <span data-bind="text: $data.data.episode"></span></a>
+              </li>
+          </ul>
+        </div>
+      </div>
+      <div class="span8" data-bind="with: selectedEpisode">
+        <div class="row">
+          <span class="span6">
+            <h3>
+              <span data-bind="text: 'S'+data.season+'E'+data.episode"></span>
+
+              <span data-bind="text: data.title, click: $root.user().toggleEpisode"></span></h3>
+            <h4>Aired: <span data-bind="text: new Date(data.first_aired_iso).toDateString()"></span></h4>
+          </span>
+          <span class="span2" style="padding-top: 30px">
+            <!--<span class="love-icon pull-right" style="cursor: pointer; padding-top: 8px; padding-left: 14px;" data-bind="click: $root.user().toggleEpisode">
+                <i 
+                  data-bind="css: { 'icon-plus': $root.user().likes().indexOf($data)===-1, 
+                  'icon-minus': $root.user().likes().indexOf($data)!==-1 }
+                  " class="icon-plus"></i>
+            </span>-->
+            <span class="love-icon-button pull-right" data-bind="heartButton: $root.user().likes"></span>
+          </span>
+        </div>
+        <p data-bind="text:data.overview">Very similar to the aired pilot called Strange Love, except the actor who plays Tara Thornton in this version is Brook Kerr instead of Rutina Wesley.
+        This version was released online around the middle of June 2008.</p>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+<!-- Actors
+================================================== -->
+<section id="buttons" data-bind="if: selectedView() && selectedView().navLabel==='Characters'">
+  <div data-bind="with: selectedView">
+    <div class="page-header">
+      <h1>Characters</h1>
+    </div>
+   <div class="row">
+      <div class="span4">
+        <div class="well" style="padding: 8px 0;">
+          <ul class="nav nav-list" data-bind="foreach: actors">
+            <li data-bind="click: $parent.selectActor, activeMenu: $parent.selectedActor">
+              <a href="#" data-bind="text: $data.data.character"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="span8" data-bind="with: selectedActor">
+          <h3 data-bind="text: data.character">Anna Paquin</h3>
+          <h4 data-bind="text: data.name">Sookie Stackhouse</h4>
+          <p>We really don't have any character information.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+     <!-- Footer
+      ================================================== -->
+      <hr>
+
+      <footer id="footer">
+        <p class="pull-right"><a href="#top">Back to top</a></p>
+        Made by <a href="http://github.com/pdoran">Patrick Doran</a>. Contact him <a href="mailto:patrick.doran@gmail.com">patrick.doran@gmail.com</a>.<br/>
+        Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>.<br/>
+        Based on <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>. Theme by Thomas Park. Contact him <a href="hello@thomaspark.me">hello@thomaspark.me</a>. Sourced from <a href="http://bootswatch.com/flatly/">Bootswatch</a>. Icons from <a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts">Google</a>.
+      </footer>
+
+</div><!-- /container -->
+
+
+<div class="modal hide fade" id="userFavoriteModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>User Favorites</h3>
+  </div>
+  <div class="modal-body">
+    <ul data-bind="foreach: $root.user().likes">
+      <li data-bind="text: $data.toString(), click: $root.user().toggleEpisode"></li>
+    </ul>
+  </div>
+</div>
+
+    <!-- Javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/vendor/jquery.min.js"></script>
+    <script src="/js/vendor/bootstrap.min.js"></script>
+    <script src="/js/vendor/knockout.min.js"></script>
+    <script src="/js/objects.js"></script>
+    <script type="text/javascript">
+      var cbs = 0;
+      var maxCb = 4;
+      var dataCB = function(show) { 
+        cbs++;
+        console.log(show + " ready");
+        if(cbs==maxCb) {
+          if(typeof dataReady!== "function") {
+            console.log("No Data Ready found.");
+          } else {
+            dataReady();
+          }
+        }
+      };
+      var shows = [
+      new Show("Breaking Bad", dataCB),
+      new Show("Mad Men", dataCB),
+      new Show("The Walking Dead", dataCB),
+      new Show("True Blood", dataCB)
+      ];
+    </script>
+    <script src="/js/kobindings.js"></script>
+    <script src="/js/6.js"></script>
+
+  </body>
+</html>
