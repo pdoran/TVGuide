@@ -5,12 +5,16 @@ var nfs = require('node-fs');
 var apiKey = "ec989300f0953fd4abcf015b6c318627";
 
 var getShowSummary = function(showName) {
-	request("http://api.trakt.tv/show/summary.json/"+apiKey+"/"+showName).pipe(fs.createWriteStream("./server/json/"+showName+".json"));	
+  request({
+      url:"http://api.trakt.tv/show/summary.json/"+apiKey+"/"+showName,
+      json:true},function(err,resp,body) {
+        request(body.poster).pipe(fs.createWriteStream("./server/img/posters/"+showName+".jpg"));
+      });
 }
 var getSeason = function(showName, season) {
   nfs.mkdir("./server/json/"+showName+"/seasons/", 0777, true, function(err){
     if(err) console.log(err);
-    request("http://api.trakt.tv/show/season.json/"+apiKey+"/"+showName+"/"+season).pipe(fs.createWriteStream("./server/json/"+showName+"/seasons/"+season+".json"));  
+    request("http://api.trakt.tv/show/season.json/"+apiKey+"/"+showName+"/"+season).pipe(fs.createWriteStream("./server/json/"+showName+"/seasons/"+season+".json"));
   });
 }
 var getSeasons = function(showName) {
@@ -20,6 +24,7 @@ var getSeasons = function(showName) {
       function(err,resp, body){
         body.forEach(function(season){
           getSeason(showName, season.season);
+          request(season.images.poster).pipe(fs.createWriteStream("./server/img/posters/"+showName+"-"+season.season+".jpg"));
         });
     });
 }
@@ -33,4 +38,5 @@ var shows = [
 ];
 shows.forEach( function(show){
  getSeasons(show);
+ getShowSummary(show);
 });

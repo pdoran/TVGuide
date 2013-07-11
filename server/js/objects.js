@@ -16,10 +16,15 @@ var Show = function(name) {
 		for(var i=1;i<=show.seasons;i++) {
 			self.seasons.push(new Season(self.nameURLNormalized,i));
 		}
+		show.people.actors.forEach(function(actor){
+			self.actors.push(new Actor(actor));
+		})
 	});
 };
 
-var Acctor = function(obj) {
+var Actor = function(obj) {
+	var self = this;
+	self.data = obj;
 	console.log(obj);
 }
 
@@ -37,7 +42,8 @@ var Season = function(showUrlName,seasonNum) {
 }
 
 var Episode = function(obj) {
-	console.log(obj);
+	var self = this;
+	self.data = obj;
 }
 
 var fetchJson = function(url, cb) {
