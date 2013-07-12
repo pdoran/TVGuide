@@ -1,7 +1,6 @@
 ko.bindingHandlers.activeMenu = {
     init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var $element = $(element);
-        var bindingData = allBindingsAccessor().activeMenu;
         var value = ko.unwrap(valueAccessor());
     	if(bindingContext.$data===value) {
     		$element.addClass("active");
@@ -11,7 +10,6 @@ ko.bindingHandlers.activeMenu = {
     },
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
     	var $element = $(element);
-        var bindingData = allBindingsAccessor().activeMenu;
         var value = ko.unwrap(valueAccessor());
     	if(bindingContext.$data===value) {
     		$element.addClass("active");

@@ -35,6 +35,9 @@
         <ul class="nav" id="main-menu-left">
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Shows <b class="caret"></b></a>
+            <!-- Show Menu ko 
+              loop over set of shows, show title
+            -->
             <ul class="dropdown-menu" id="show-menu" data-bind="foreach: shows">
               <li><a href="#" data-bind="text: title, click: $parent.selectShow">Shows Here</a></li>
             </ul>
