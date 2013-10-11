@@ -6,23 +6,26 @@ and how they can be used to build a feature rich front end web application.
 
 Usage
 =====
-Clone
 
+```javascript
 npm install
-
 node scrape apiKey 
-
-apiKey = api key to api.trakt.tv (if you are too lazy to get a key, 
-just look at an earlier revision mine is in there)
-
+//apiKey = api key to api.trakt.tv (if you are too lazy to get a key, 
+//just look at an earlier revision mine is in there)
 node index
+```
 
-Then type start
+This will bring up a command line:
+```
+node index
+Development server running at http://localhost:8000
+```
 
-This will fire up your browser to http://localhost:8000
+Valid commands from here are:
+* start: reset the tutorial and fire up your default browser to the default url
+* next: Move to the next slide, just refresh your browser after each new slide
+* back: Moves back to the previous slide
 
-To proceed to the next slide/enhancement type next in the node console running node index
-If you want to go back, type back, start will start you over.
 
 Tips
 ====
