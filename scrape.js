@@ -2,7 +2,8 @@ var request = require('request');
 var fs = require('fs');
 var nfs = require('node-fs');
 
-var apiKey = "ec989300f0953fd4abcf015b6c318627";
+if(process.argv.length<3) throw new Error("Must provide an api key as a command line argument");
+var apiKey = process.argv[2].toString();
 
 var getShowSummary = function(showName) {
   request({
